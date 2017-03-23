@@ -12,17 +12,15 @@ public class MyIntTree implements IntTree {
 
     @Override
     public int getValue() { return value; }
-    public List<IntTree> getChildren() { return children; }
+    private List<IntTree> getChildren() { return children; }  //Ottiene la lista children (i figli)
 
     @Override
     public int childrenNumber() { return children.size(); }
 
     @Override
-    public int nodes() {
-        int n = 1;  //Almeno il nodo stesso
-        if(children.isEmpty()) { return n; }
-
+    public int nodes() {  //Possibile riscriverlo molto più corto
         tempC = 1;  //Reset per buona misura
+        if(this.children.isEmpty()) { return tempC; }  //Almeno il nodo stesso
         nodeExplorer(this);
         return tempC;
     }
@@ -34,7 +32,12 @@ public class MyIntTree implements IntTree {
 
     @Override
     public int height() {
-        return 0;
+        if(this.children.isEmpty()) { return 0; }  //Se si tratta di una foglia ritorna 0
+        else {
+            int maxDepth = 0;
+            for(IntTree h : this.getChildren()) { maxDepth = Math.max(maxDepth, h.height()); }
+            return maxDepth + 1;
+        }
     }
 
     @Override
