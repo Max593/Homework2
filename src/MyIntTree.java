@@ -18,16 +18,13 @@ public class MyIntTree implements IntTree {
     public int childrenNumber() { return children.size(); }
 
     @Override
-    public int nodes() {  //Possibile riscriverlo molto più corto
-        tempC = 1;  //Reset per buona misura
-        if(this.children.isEmpty()) { return tempC; }  //Almeno il nodo stesso
-        nodeExplorer(this);
-        return tempC;
-    }
-    private int tempC = 1;  //Counter temporaneo per i nodi
-    private void nodeExplorer(IntTree t) {  //Metodo ricorsivo per conteggio dei nodi
-        tempC += t.childrenNumber();
-        for(IntTree i : ((MyIntTree) t).getChildren()) { nodeExplorer(i); }
+    public int nodes() {
+        if(this.children.isEmpty()) { return 1; }  //Ritorna almeno il nodo stesso
+        else {
+            int n = 0;
+            for(IntTree h : this.getChildren()) { n += h.nodes(); }
+            return n+1;
+        }
     }
 
     @Override
