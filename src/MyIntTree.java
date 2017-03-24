@@ -13,7 +13,6 @@ public class MyIntTree implements IntTree {
 
     @Override
     public int getValue() { return value; }
-    private List<IntTree> getChildren() { return children; }  //Ottiene la lista children (i figli)
 
     @Override
     public int childrenNumber() { return children.size(); }
@@ -23,7 +22,7 @@ public class MyIntTree implements IntTree {
         if(this.children.isEmpty()) { return 1; }  //Ritorna almeno il nodo stesso
         else {
             int n = 0;
-            for(IntTree h : this.getChildren()) { n += h.nodes(); }
+            for(IntTree h : this.children) { n += h.nodes(); }
             return n+1;
         }
     }
@@ -33,15 +32,15 @@ public class MyIntTree implements IntTree {
         if(this.children.isEmpty()) { return 0; }  //Se si tratta di una foglia ritorna 0
         else {
             int maxDepth = 0;
-            for(IntTree h : this.getChildren()) { maxDepth = Math.max(maxDepth, h.height()); }
+            for(IntTree h : this.children) { maxDepth = Math.max(maxDepth, h.height()); }
             return maxDepth + 1;
         }
     }
 
     @Override
-    public boolean equals(IntTree t) { return Objects.equals(this.hashCode(), t.hashCode()); }
+    public boolean equals(IntTree t) { return Objects.equals(this.hashCode(), t.hashCode()); }  //Controllo basato su hashCode
     @Override
-    public int hashCode() { return Integer.valueOf(sVisit(this)); }
+    public int hashCode() { return Integer.valueOf(sVisit(this)); }  //HashCode generato con sVisit()
 
     @Override
     public void addChild(IntTree child) { this.children.add(child); }
@@ -61,7 +60,7 @@ public class MyIntTree implements IntTree {
     public void visit() {
         System.out.println(sVisit(this));
     }
-    private String sVisit(MyIntTree t) {
+    private String sVisit(MyIntTree t) {  //Riempie ricorsivamente una stringa dal fondo verso l'inizio con i valori dell'albero
         if(t.children.isEmpty()) { return String.valueOf(t.getValue()); }
         else {
             String n = "";
@@ -72,7 +71,7 @@ public class MyIntTree implements IntTree {
 
     @Override
     public void printIntTree() { printIntTree("", true); }
-    private void printIntTree(String prefix, boolean isTail) {
+    private void printIntTree(String prefix, boolean isTail) {  //Utilizzato operatore condizionale ternario per leggibilità generale
         System.out.println(prefix + (isTail ? "└── " : "├── ") + this.value);
         for (int i = 0; i < this.children.size() - 1; i++) {
             ((MyIntTree)this.children.get(i)).printIntTree(prefix + (isTail ? "    " : "│   "), false);
