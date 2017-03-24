@@ -77,7 +77,15 @@ public class MyIntTree implements IntTree {
     }
 
     @Override
-    public void printIntTree() {
-
+    public void printIntTree() { printIntTree("", true); }
+    private void printIntTree(String prefix, boolean isTail) {
+        System.out.println(prefix + (isTail ? "└── " : "├── ") + this.value);
+        for (int i = 0; i < this.children.size() - 1; i++) {
+            ((MyIntTree)this.children.get(i)).printIntTree(prefix + (isTail ? "    " : "│   "), false);
+        }
+        if (this.children.size() > 0) {
+            ((MyIntTree)this.children.get(this.children.size() - 1)).printIntTree(prefix + (isTail ?"    " : "│   "), true);
+        }
     }
+
 }

@@ -17,6 +17,8 @@ public class TestIntTree {
         int[] path = {2,1};
         t.addChild(t1.followPath(path));
         t.visit(); // stampa 7 5
+        System.out.println("\n");
         //t.followPath(path); // lancia NoSuchTreeException
+        t.printIntTree();
     }
 }
