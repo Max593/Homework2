@@ -59,7 +59,7 @@ public class MyIntTree implements IntTree {
 
     @Override
     public void visit() {
-        System.out.print(sVisit(this));
+        System.out.println(sVisit(this));
     }
     private String sVisit(MyIntTree t) {
         if(t.children.isEmpty()) { return String.valueOf(t.getValue()); }
