@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by max on 22/03/17.
@@ -39,9 +40,9 @@ public class MyIntTree implements IntTree {
     }
 
     @Override
-    public boolean equals(IntTree t) {
-        return false;
-    }
+    public boolean equals(IntTree t) { return Objects.equals(this.hashCode(), t.hashCode()); }
+    @Override
+    public int hashCode() { return Integer.valueOf(this.sVisit()); }
 
     @Override
     public void addChild(IntTree child) { this.children.add(child); }
@@ -52,7 +53,7 @@ public class MyIntTree implements IntTree {
         for (int aPath : path) {
             if (n.children.isEmpty()) { throw new NoSuchTreeException(); }
             try{ n = ((MyIntTree) n.children.get(aPath-1)); }
-            catch (IndexOutOfBoundsException ignore) { throw new NoSuchTreeException(); }
+            catch (Exception ignore) { throw new NoSuchTreeException(); }
         }
         return n;
     }
@@ -63,6 +64,16 @@ public class MyIntTree implements IntTree {
         List<IntTree> reversed = this.children;
         Collections.reverse(reversed);
         for(IntTree h : reversed) { h.visit(); }
+    }
+    public String sVisit() {
+        if(this.children.isEmpty()) { return String.valueOf(this.getValue()); }
+        else {
+            String n = "";
+            List<IntTree> reversed = this.children;
+            Collections.reverse(reversed);
+            for(IntTree h : reversed) { n = ((MyIntTree) h).sVisit() + n; }
+            return this.getValue() + n;
+        }
     }
 
     @Override

@@ -63,5 +63,7 @@ public class PrivateTest {
         try { System.out.println(t.followPath(path).getValue()); }
         catch (NoSuchTreeException ignored) { System.out.println("NoSuchTreeException"); }
         t.visit();
+        System.out.print("\n");
+        System.out.println(t.sVisit());
     }
 }
