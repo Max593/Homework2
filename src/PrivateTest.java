@@ -64,7 +64,6 @@ public class PrivateTest {
         catch (NoSuchTreeException ignored) { System.out.println("NoSuchTreeException"); }
         t.visit();
         System.out.print("\n");
-        //System.out.println(t.sVisit());
         System.out.println("----------------------");
         t.printIntTree();
     }
