@@ -59,5 +59,9 @@ public class PrivateTest {
 
         System.out.println("Numero nodi: "+t.nodes());
         System.out.println("Altezza: "+t.height());
+        int[] path = {1,2,1};
+        try { System.out.println(t.followPath(path).getValue()); }
+        catch (NoSuchTreeException ignored) { System.out.println("NoSuchTreeException"); }
+        t.visit();
     }
 }

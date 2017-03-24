@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -47,12 +48,21 @@ public class MyIntTree implements IntTree {
 
     @Override
     public IntTree followPath(int[] path) throws NoSuchTreeException {
-        return null;
+        MyIntTree n = this;
+        for (int aPath : path) {
+            if (n.children.isEmpty()) { throw new NoSuchTreeException(); }
+            try{ n = ((MyIntTree) n.children.get(aPath-1)); }
+            catch (IndexOutOfBoundsException ignore) { throw new NoSuchTreeException(); }
+        }
+        return n;
     }
 
     @Override
     public void visit() {
-
+        System.out.print(this.getValue());
+        List<IntTree> reversed = this.children;
+        Collections.reverse(reversed);
+        for(IntTree h : reversed) { h.visit(); }
     }
 
     @Override
