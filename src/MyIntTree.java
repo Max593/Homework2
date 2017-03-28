@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+//import java.util.Objects;
 
 /**
  * Created by max on 22/03/17.
@@ -38,9 +38,28 @@ public class MyIntTree implements IntTree {
     }
 
     @Override
+    public boolean equals(IntTree t) {
+        if(this.getValue() != t.getValue() || this.childrenNumber() != t.childrenNumber()) { return false; }
+        else if(this.childrenNumber() == 0) { return true; }
+        else {
+            boolean res = true;
+            for(int i = 0; i < this.childrenNumber(); i++) {
+                int arr[] = {i};
+                try {
+                    res = this.followPath(arr).getValue() == t.followPath(arr).getValue() && this.followPath(arr).equals(t.followPath(arr));
+                } catch (NoSuchTreeException ignore) {}
+            }
+            return res;
+        }
+    }
+
+/*  //Possibilità di errore, da ricontrollare.
+    @Override
     public boolean equals(IntTree t) { return Objects.equals(this.hashCode(), t.hashCode()); }  //Controllo basato su hashCode
     @Override
     public int hashCode() { return Integer.valueOf(sVisit(this)); }  //HashCode generato con sVisit()
+
+ */
 
     @Override
     public void addChild(IntTree child) { this.children.add(child); }

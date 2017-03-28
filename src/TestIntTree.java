@@ -11,6 +11,7 @@ public class TestIntTree {
         t1.addChild(new MyIntTree(5));
         t2.addChild(new MyIntTree(5));
         System.out.println(t1.equals(t2)); // stampa true
+        System.out.println(t.equals(t1)); // stampa false
         t1.addChild(t2);
         t1.addChild(new MyIntTree(3));
         t1.visit(); // stampa 9 3 9 5 5
