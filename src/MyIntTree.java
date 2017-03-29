@@ -39,7 +39,8 @@ public class MyIntTree implements IntTree {
 
     @Override
     public boolean equals(IntTree t) {
-        if(this.getValue() != t.getValue() || this.childrenNumber() != t.childrenNumber()) { return false; }
+        if(this.getValue() != t.getValue() || this.childrenNumber() != t.childrenNumber()
+                || this.nodes() != t.nodes()) { return false; }
         else if(this.childrenNumber() == 0) { return true; }
         else {
             boolean res = true;
@@ -47,6 +48,7 @@ public class MyIntTree implements IntTree {
                 int arr[] = {i};
                 try {
                     res = this.followPath(arr).getValue() == t.followPath(arr).getValue() && this.followPath(arr).equals(t.followPath(arr));
+                    if(!res) { break; }
                 } catch (NoSuchTreeException ignore) {}
             }
             return res;

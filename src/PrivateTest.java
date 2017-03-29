@@ -57,6 +57,61 @@ public class PrivateTest {
         t.addChild(t13);
         t.addChild(t14);
 
+
+        MyIntTree at = new MyIntTree(4);  //root
+
+        MyIntTree at11 = new MyIntTree(2);  //1
+        MyIntTree at12 = new MyIntTree(2);
+        MyIntTree at13 = new MyIntTree(4);
+        MyIntTree at14 = new MyIntTree(6);
+
+        MyIntTree at21 = new MyIntTree(1);  //2
+        MyIntTree at22 = new MyIntTree(2);
+        MyIntTree at23 = new MyIntTree(6);
+        MyIntTree at24 = new MyIntTree(7);
+        MyIntTree at25 = new MyIntTree(3);
+        MyIntTree at26 = new MyIntTree(2);
+
+        MyIntTree at31 = new MyIntTree(1);  //3
+        MyIntTree at32 = new MyIntTree(2);
+        MyIntTree at33 = new MyIntTree(3);
+        MyIntTree at34 = new MyIntTree(3);
+        MyIntTree at35 = new MyIntTree(8);
+        MyIntTree at36 = new MyIntTree(2);
+        MyIntTree at37 = new MyIntTree(9);
+
+        MyIntTree at41 = new MyIntTree(5);  //4
+        MyIntTree at42 = new MyIntTree(2);
+        MyIntTree at43 = new MyIntTree(5);
+        MyIntTree at44 = new MyIntTree(6);
+        MyIntTree at45 = new MyIntTree(7);
+
+        at33.addChild(at43);
+        at33.addChild(at44);
+        at31.addChild(at41);
+        at31.addChild(at42);
+        at37.addChild(at45);
+
+        at21.addChild(at31);
+        at21.addChild(at32);
+        at21.addChild(at33);
+        at22.addChild(at34);
+        at24.addChild(at35);
+        at24.addChild(at36);
+        at25.addChild(at37);
+
+        at11.addChild(at21);
+        at11.addChild(at22);
+        at12.addChild(at23);
+        at13.addChild(at24);
+        at13.addChild(at25);
+        at14.addChild(at26);
+
+        at.addChild(at11);
+        at.addChild(at12);
+        at.addChild(at13);
+        at.addChild(at14);
+
         System.out.println("Numero nodi: "+t.nodes());
         System.out.println("Altezza: "+t.height());
         int[] path = {1,2,1};
@@ -65,6 +120,34 @@ public class PrivateTest {
         t.visit();
         System.out.print("\n");
         System.out.println("----------------------");
+        System.out.println(t.equals(at));
+        System.out.println(t.equals(at));
         t.printIntTree();
     }
 }
+
+/*
+└── 4
+    ├── 2
+    │   ├── 1
+    │   │   ├── 1
+    │   │   │   ├── 5
+    │   │   │   └── 2
+    │   │   ├── 2
+    │   │   └── 3
+    │   │       ├── 5
+    │   │       └── 6
+    │   └── 2
+    │       └── 3
+    ├── 2
+    │   └── 6
+    ├── 4
+    │   ├── 7
+    │   │   ├── 8
+    │   │   └── 2
+    │   └── 3
+    │       └── 9
+    │           └── 7
+    └── 6
+        └── 2
+ */
